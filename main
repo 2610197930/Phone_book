@@ -1,0 +1,696 @@
+#include "stdafx.h"
+#include "stdafx.h"
+#include <iostream>
+#include <stdlib.h>
+#include <cstring>
+#include <cstdio>
+#pragma warning(disable: 4996)
+
+
+using namespace std;
+
+
+enum Menu {
+	Contact_List = '1', Add_Contact = '2',
+	Delete_Contact, Find_Contact_Name,
+	Find_Contact_Number, Exit
+};
+
+
+class abonent {
+
+	char* name;
+	char* home_number;
+	char* work_number;
+	char* mobile_number;
+	char* info;
+
+public:
+	abonent(char* name = NULL, char* mobile_number = NULL,
+		char* home_number = NULL, char* work_number = NULL, char* info = NULL)
+	{
+		this->name = this->mobile_number = this->home_number
+			= this->work_number = this->info = NULL;
+		set_name(name);
+		set_mobile_number(mobile_number);
+		set_home_number(home_number);
+		set_work_number(work_number);
+		set_info(info);
+	}
+
+	void set_name(char* Name)
+	{
+		if (Name) {
+			this->name = new char[strlen(Name) + 1];
+			strcpy(this->name, Name);
+		}
+	}
+	void set_home_number(char* Home_Number)
+	{
+		if (Home_Number)
+		{
+			this->home_number = new char[strlen(Home_Number) + 1];
+			strcpy(this->home_number, Home_Number);
+		}
+	}
+	void set_work_number(char* Work_Number)
+	{
+		if (Work_Number)
+		{
+			this->work_number = new char[strlen(Work_Number) + 1];
+			strcpy(this->work_number, Work_Number);
+		}
+	}
+	void set_mobile_number(char* Mobile_Number)
+	{
+		if (Mobile_Number)
+		{
+			this->mobile_number = new char[strlen(Mobile_Number) + 1];
+			strcpy(this->mobile_number, Mobile_Number);
+		}
+	}
+	void set_info(char* Info)
+	{
+		if (Info)
+		{
+			this->info = new char[strlen(Info) + 1];
+			strcpy(this->info, Info);
+		}
+	}
+	char* get_name()
+	{
+		return name;
+	}
+	char* get_home_number()
+	{
+		return home_number;
+	}
+	char* get_work_number()
+	{
+		return work_number;
+	}
+	char* get_mobile_number()
+	{
+		return mobile_number;
+	}
+	char* get_info()
+	{
+		return info;
+	}
+
+	void show() {
+
+		if (this->name != NULL) {
+			cout << "______\nFull name: " << this->name << endl;
+		}
+		if (this->home_number != NULL) {
+			cout << "Home number: " << this->home_number << endl;
+		}
+		if (this->work_number != NULL) {
+			cout << "Work number: " << this->work_number << endl;
+		}
+		if (this->mobile_number != NULL) {
+			cout << "Mobile number: " << this->mobile_number << endl;
+		}
+		if (this->info != NULL) {
+			cout << "Info: " << this->info << endl;
+		}
+	}
+	abonent operator=(abonent& ob)
+	{
+
+		if (ob.name != NULL) {
+			//if (this->Name != NULL)
+			{
+				//delete[] this->Name;
+			}
+			set_name(ob.name);
+		}
+		else {
+			this->name = NULL;
+		}
+
+		if (ob.home_number != NULL) {
+			//if (this->Home_Number != NULL)
+			{
+				//delete[] this->Home_Number;
+			}
+			set_home_number(ob.home_number);
+		}
+		else {
+			this->home_number = NULL;
+		}
+
+		if (ob.work_number != NULL) {
+			//if (this->Work_Number != NULL)
+			{
+				//delete[] this->Work_Number;
+			}
+			set_work_number(ob.work_number);
+		}
+		else {
+			this->work_number = NULL;
+		}
+
+		if (ob.mobile_number != NULL) {
+			//if (this->Mobile_Number != NULL)
+			{
+				//delete[] this->Mobile_Number;
+			}
+			set_mobile_number(ob.mobile_number);
+		}
+		else {
+			this->mobile_number = NULL;
+		}
+
+		if (ob.info != NULL) {
+			//if (this->Info != NULL)
+			{
+				//delete[] this->Info;
+			}
+			set_info(ob.info);
+		}
+		else {
+			this->info = NULL;
+		}
+		return *this;
+	}
+
+	~abonent() {
+		//cout << "______\t|\nДеструктор: ";
+		//	if (name) {
+		//		cout << this->Name << "\t|\n";
+		//	}
+		if (name) {
+			delete[] this->name;
+		}
+		if (home_number) {
+			delete[] this->home_number;
+		}
+		if (work_number) {
+			delete[] this->work_number;
+		}
+		if (mobile_number) {
+			delete[] this->mobile_number;
+		}
+		if (info) {
+			delete[] this->info;
+		}
+
+	}
+
+	abonent(const abonent& orig)
+	{
+		if (orig.name) {
+			set_name(orig.name);
+		}
+		else {
+			name = NULL;
+		}
+		if (orig.mobile_number) {
+			set_mobile_number(orig.mobile_number);
+		}
+		else {
+			mobile_number = NULL;
+		}
+		if (orig.work_number) {
+			set_work_number(orig.work_number);
+		}
+		else {
+			work_number = NULL;
+		}
+		if (orig.home_number) {
+			set_home_number(orig.home_number);
+		}
+		else {
+			home_number = NULL;
+		}
+		if (orig.info) {
+			set_info(orig.info);
+		}
+		else {
+			info = NULL;
+		}
+		//cout << "Конструктор копирования:";
+		//if (orig.Name != NULL) {
+		//	cout << Name << endl;
+		//}
+	}
+
+	void rewrite_all_abonent() {
+
+		char Name[255];
+		char Home_Number[255];
+		char Work_Number[255];
+		char Mobile_Number[255];
+		char Info[255];
+		int s;
+		cout << "Full name new contact: ";
+		cin.ignore();
+		cin.getline(Name, 255);
+		set_name(Name);
+
+		cout << "Do you want to add contact home number?\n"
+			<< "[1] Yes\n[2] No" << endl;
+		cin >> s;
+
+		if (s == 1) {
+			cout << "Home number for a new contact: ";
+			cin >> Home_Number;
+			set_home_number(Home_Number);
+		}
+
+		cout << "Do you want to add contact work number?\n"
+			<< "[1] Yes\n[2] No" << endl;
+		cin >> s;
+		if (s == 1) {
+			cout << "Work number for a new contact: ";
+			cin >> Work_Number;
+			set_work_number(Work_Number);
+		}
+
+		cout << "Do you want to add contact mobile number?\n"
+			<< "[1] Yes\n[2] No" << endl;
+		cin >> s;
+		if (s == 1) {
+			cout << "Mobile number for a new contact: ";
+			cin >> Mobile_Number;
+			set_mobile_number(Mobile_Number);
+		}
+
+		cout << "Do you want to add contact info?\n"
+			<< "[1] Yes\n[2] No" << endl;
+		cin >> s;
+		if (s == 1) {
+			cout << "Additional info for a new contact: ";
+			cin.ignore();
+			cin.getline(Info, 255);
+			set_info(Info);
+		}
+	}
+
+};
+
+
+
+class phone_book
+{
+	int size;
+	int count;
+	abonent* abonents;
+
+	void resize()
+	{
+		if (count >= size)
+		{
+			size *= 2;
+			abonent* tmp = new abonent[size];
+			for (int i = 0; i < count; i++)
+			{
+				tmp[i] = abonents[i];
+			}
+			delete[] abonents;
+			abonents = tmp;
+		}
+	}
+public:
+	phone_book(int size = 10) {
+		abonents = new abonent[size];
+		this->size = size;
+		count = 0;
+	}
+	void info()
+	{
+
+		for (int i = 0; i < count; i++)
+		{
+			abonents[i].show();
+		}
+	}
+	if (count == 0) {
+		cout << "There are no clients in this phone book" << endl;
+	}
+}
+
+int get_count() {
+
+	return this->count;
+}
+int get_size() {
+
+	return this->size;
+}
+abonent get_abonent(int i) {
+
+	return abonents[i];
+}
+void add(abonent& new_client)
+{
+	resize();
+	abonents[count] = new_client;
+	count++;
+}
+
+
+void remove(char* client_name)
+{
+	int idx = -1;
+	for (int i = 0; i < count; i++)
+	{
+		if (strcmp(client_name, abonents[i].get_name()) == 0)
+		{
+			idx = i;
+			break;
+		}
+	}
+
+	if (idx >= 0)
+	{
+		cout << "Contact: " << client_name << " deleted\n";
+		count--;
+		for (int i = idx; i < count; i++)
+		{
+
+			abonents[i] = abonents[i + 1];
+		}
+	}
+	else {
+		cout << "No contact found\n";
+	}
+}
+
+abonent find_name(char* Name)
+{
+
+
+	char* Name__ = new char[strlen(Name) + 1];
+	strcpy(Name__, Name);
+
+	int g = 0;
+	for (int i = 0; i < count; i++)
+	{
+		if (strcmp(Name__, abonents[i].get_name()) == 0)
+		{
+			cout << "Contact found:\n";
+			return abonents[i];
+		}
+
+	}
+	if (g == 0) {
+		cout << "No contact found\n";
+	}
+}
+abonent find_number(char* Number)
+{
+
+
+	char* Number_ = new char[strlen(Number) + 1];
+	strcpy(Number_, Number);
+
+	int g = 0;
+	for (int i = 0; i < count; i++)
+	{
+		if (abonents[i].get_home_number() != NULL) {
+			if (strcmp(Number_, abonents[i].get_home_number()) == 0)
+			{
+				cout << "Contact found:\n";
+				return abonents[i];
+			}
+		}
+		if (abonents[i].get_work_number() != NULL) {
+			if (strcmp(Number_, abonents[i].get_work_number()) == 0)
+			{
+				cout << "Contact found:\n";
+				return abonents[i];
+			}
+		}
+		if (abonents[i].get_mobile_number() != NULL) {
+			if (strcmp(Number_, abonents[i].get_mobile_number()) == 0)
+			{
+				cout << "Contact found:\n";
+				return abonents[i];
+			}
+		}
+
+	}
+	if (g == 0) {
+		cout << "No contact found\n";
+	}
+}
+
+~phone_book() {
+
+	delete[] abonents;
+}
+phone_book(const phone_book& orig)
+{
+	this->count = orig.count;
+	this->size = orig.size;
+	this->abonents = new abonent[size];
+
+	for (int i = 0; i < count; i++)
+	{
+		abonents[i] = orig.abonents[i];
+	}
+}
+
+phone_book& operator=(const phone_book& orig)
+{
+	this->count = orig.count;
+	this->size = orig.size;
+	delete[] abonents;
+	this->abonents = new abonent[size];
+
+	for (int i = 0; i < count; i++)
+	{
+		abonents[i] = orig.abonents[i];
+	}
+	return *this;
+}
+};
+
+
+
+char menu_(phone_book& book) {
+	char choise;
+
+	cout << "---=== Menu ===---\n["
+		<< Contact_List - 48 << "] Show contact list\n["
+		<< Add_Contact - 48 << "] Add contact\n["
+		<< Delete_Contact - 48 << "] Delete contact\n["
+		<< Find_Contact_Name - 48 << "] Find contact by name\n["
+		<< Find_Contact_Number - 48 << "] Find contact by number\n["
+		<< Exit - 48 << "] Exit" << endl;
+	cin >> choise;
+
+	system("cls");
+
+	switch (choise)
+	{
+	case Contact_List: {
+		cout << " Show contact list\n";
+		book.info();
+
+		system("pause");
+		break;
+	}
+	case Add_Contact: {
+		cout << " Add contact\n";
+		abonent new_;
+
+		new_.rewrite_all_abonent();
+
+
+		book.add(new_);
+
+
+		system("pause");
+		break;
+	}
+	case Delete_Contact: {
+		cout << " Delete contact\n";
+		char name[255];
+		cout << "Enter contact name:\n";
+		cin.ignore();
+		cin.getline(name, 255);
+
+		char* Name__ = new char[strlen(name) + 1];
+		strcpy(Name__, name);
+
+		book.remove(Name__);
+
+
+
+		system("pause");
+		break;
+	}
+	case Find_Contact_Name: {
+		cout << " Find contact by name\n";
+		char Name_[255];
+		cout << "Enter contact name :\n";
+		cin.ignore();
+		cin.getline(Name_, 255);
+
+		char* Name__ = new char[strlen(Name_) + 1];
+		strcpy(Name__, Name_);
+
+		abonent found_client = book.find_name(Name__);
+
+		found_client.show();
+
+		system("pause");
+		break;
+	}
+	case Find_Contact_Number: {
+		cout << " Find contact by number\n";
+		char Number[255];
+		cout << "Enter contact number:\n";
+		cin.ignore();
+		cin.getline(Number, 255);
+
+		char* Number_ = new char[strlen(Number) + 1];
+		strcpy(Number_, Number);
+
+		abonent found_number = book.find_number(Number_);
+
+		found_number.show();
+		system("pause");
+		break;
+	}
+	case Exit: {
+		cout << " Exit\n";
+
+		system("pause");
+		break;
+	}
+
+
+	default:
+		break;
+	}
+
+	system("cls");
+	return choise;
+}
+void write_demo(phone_book& book)
+{
+
+	FILE* fp = fopen("filename.txt", "w"); // открытие файла
+	int a = book.get_count();
+	int b = book.get_size();
+
+	if (fp) // Если файл удалось открыть
+	{
+
+		fprintf(fp, "%d\n", a); // count
+		fprintf(fp, "%d\n", b); //size
+		for (int i = 0; i < book.get_count(); i++) {
+			abonent a = book.get_abonent(i);
+
+			if (a.get_name() != NULL) {
+				fprintf(fp, "%s\n", a.get_name());
+			}
+			else {
+				fprintf(fp, "Null\n");
+			}
+
+			if (a.get_mobile_number() != NULL) {
+				fprintf(fp, "%s\n", a.get_mobile_number());
+			}
+			else {
+				fprintf(fp, "Null\n");
+			}
+			if (a.get_home_number() != NULL) {
+				fprintf(fp, "%s\n", a.get_home_number());
+			}
+			else {
+				fprintf(fp, "Null\n");
+			}
+			if (a.get_work_number() != NULL) {
+				fprintf(fp, "%s\n", a.get_work_number());
+			}
+			else {
+				fprintf(fp, "Null\n");
+			}
+			if (a.get_info() != NULL) {
+				fprintf(fp, "%s\n", a.get_info());
+			}
+			else {
+				fprintf(fp, "Null\n");
+			}
+
+		}
+		fclose(fp); // закрыть файл
+	}
+	else
+	{
+		cout << "Error open file: "
+			<< "code: " << errno
+			<< " message: " << strerror(errno)
+			<< endl;
+	}
+}
+phone_book read_demo()
+{
+	FILE* fp = fopen("filename.txt", "r");
+	phone_book book;
+	if (fp)
+	{
+		int count, size;
+		char c[255];
+		fscanf(fp, "%d\n", &count);//count
+		fscanf(fp, "%d\n", &size);//size
+		book = phone_book(size);
+		for (int i = 0; i < count; i++) {
+			abonent a;
+			fscanf(fp, "%s\n", &c);
+
+			if (strcmp(c, "Null") != 0) {
+				a.set_name(c);
+			}
+			fscanf(fp, "%s\n", &c);
+			if (strcmp(c, "Null") != 0) {
+				a.set_mobile_number(c);
+			}
+			fscanf(fp, "%s\n", &c);
+			if (strcmp(c, "Null") != 0) {
+				a.set_home_number(c);
+			}
+			fscanf(fp, "%s\n", &c);
+			if (strcmp(c, "Null") != 0) {
+				a.set_work_number(c);
+			}
+			fscanf(fp, "%s\n", &c);
+			if (strcmp(c, "Null") != 0) {
+				a.set_info(c);
+			}
+
+			book.add(a);
+		}
+	}
+	else {
+		cout << "Error open file: "
+			<< "code: " << errno
+			<< " message: " << strerror(errno)
+			<< endl;
+	}
+	return book;
+}
+int main()
+{
+
+	phone_book book1 = read_demo();
+
+	system("pause");
+	int choise_;
+	char choise;
+	do {
+		choise = menu_(book1);
+	} while (choise != Exit);
+
+	write_demo(book1);
+
+	system("pause");
+	return 0;
+
+}
